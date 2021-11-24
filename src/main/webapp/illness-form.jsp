@@ -20,11 +20,11 @@
         </div>
 
         <ul class="navbar-nav">
-            <li><a href="<%=request.getContextPath()%>/list"
+            <li><a href="<%=request.getContextPath()%>/listPerson"
                    class="nav-link">Persons</a></li>
             <li><a href="<%=request.getContextPath()%>/listSL"
                    class="nav-link">Sick leaves</a></li>
-            <li><a href="<%=request.getContextPath()%>/listPayments"
+            <li><a href="<%=request.getContextPath()%>/listPayment"
                    class="nav-link">Payments</a></li>
         </ul>
     </nav>
@@ -33,73 +33,67 @@
 <div class="container col-md-5">
     <div class="card">
         <div class="card-body">
-            <c:if test="${person != null}">
-            <form action="updatePerson" method="post">
+            <c:if test="${illness != null}">
+            <form action="updateSL" method="post">
                 </c:if>
-                <c:if test="${person == null}">
-                <form action="insertPerson" method="post">
+                <c:if test="${illness == null}">
+                <form action="insertSL" method="post">
                     </c:if>
 
                     <caption>
                         <h2>
-                            <c:if test="${person != null}">
-                                Edit Person
+                            <c:if test="${illness != null}">
+                                Edit Sick Leave
                             </c:if>
-                            <c:if test="${person == null}">
-                                Add New Person
+                            <c:if test="${illness == null}">
+                                Add New Sick Leave
                             </c:if>
                         </h2>
                     </caption>
 
-                    <c:if test="${person != null}">
-                        <input type="hidden" name="id" value="<c:out value='${person.id}' />"/>
+                    <c:if test="${illness != null}">
+                        <input type="hidden" name="id" value="<c:out value='${illness.id}' />"/>
                     </c:if>
 
-
                     <fieldset class="form-group">
-                        <label>Personal code</label> <input type="text"
-                                                            value="<c:out value='${person.personalCode}' />"
-                                                            class="form-control"
-                                                            name="personalCode" required="required">
+                        <label>Person ID</label> <input type="number"
+                                                        value="<c:out value='${illness.personId}' />"
+                                                        class="form-control"
+                                                        name="personId" required="required">
                     </fieldset>
                     <fieldset class="form-group">
-                        <label>First Name</label> <input type="text"
-                                                         value="<c:out value='${person.firstName}' />"
+                        <label>Start date</label> <input type="text"
+                                                         value="<c:out value='${illness.startDate}' />"
                                                          class="form-control"
-                                                         name="firstName" required="required">
+                                                         name="startDate" required="required">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Last Name</label> <input type="text"
-                                                        value="<c:out value='${person.lastName}' />"
+                        <label>End date</label> <input type="text"
+                                                       value="<c:out value='${illness.endDate}' />"
+                                                       class="form-control"
+                                                       name="endDate" required="required">
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label>Diagnosis</label> <input type="text"
+                                                        value="<c:out value='${illness.diagnosis}' />"
                                                         class="form-control"
-                                                        name="lastName" required="required">
+                                                        name="diagnosis">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Address</label> <input type="text"
-                                                      value="<c:out value='${person.address}' />" class="form-control"
-                                                      name="address">
+                        <label>Medical doctor</label> <input type="text"
+                                                             value="<c:out value='${illness.medicalDoctor}' />"
+                                                             class="form-control"
+                                                             name="medicalDoctor">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Email</label> <input type="text"
-                                                    value="<c:out value='${person.email}' />" class="form-control"
-                                                    name="email">
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Bank Account</label> <input type="text"
-                                                           value="<c:out value='${person.bankAccount}' />"
-                                                           class="form-control"
-                                                           name="bankAccount">
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Insurance</label> <input type="text"
-                                                        value="<c:out value='${person.insurance}' />"
-                                                        class="form-control"
-                                                        name="insurance">
+                        <label>Notes</label> <input type="text"
+                                                    value="<c:out value='${illness.notes}' />"
+                                                    class="form-control"
+                                                    name="notes">
                     </fieldset>
 
                     <button type="submit" class="btn btn-success">Save</button>

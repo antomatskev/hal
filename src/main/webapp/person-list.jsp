@@ -56,19 +56,19 @@
             <c:if test="${empty personList}">
                 <tr>Check your Database connection!</tr>
             </c:if>
-            <c:forEach var="person" items="${personList}">
+            <c:forEach var="illness" items="${personList}">
                 <tr>
-                    <td><c:out value="${person.id}"/></td>
-                    <td><c:out value="${person.personalCode}"/></td>
-                    <td><c:out value="${person.firstName}"/></td>
-                    <td><c:out value="${person.lastName}"/></td>
-                    <td><c:out value="${person.address}"/></td>
-                    <td><c:out value="${person.email}"/></td>
-                    <td><c:out value="${person.bankAccount}"/></td>
-                    <td><c:out value="${person.insurance}"/></td>
-                    <td><a href="editPerson?id=<c:out value='${person.id}' />">Edit</a>
+                    <td><c:out value="${illness.id}"/></td>
+                    <td><c:out value="${illness.personalCode}"/></td>
+                    <td><c:out value="${illness.firstName}"/></td>
+                    <td><c:out value="${illness.lastName}"/></td>
+                    <td><c:out value="${illness.address}"/></td>
+                    <td><c:out value="${illness.email}"/></td>
+                    <td><c:out value="${illness.bankAccount}"/></td>
+                    <td><c:out value="${illness.insurance}"/></td>
+                    <td><a href="editPerson?id=<c:out value='${illness.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deletePerson?id=<c:out value='${person.id}' />">Delete</a></td>
+                                href="deletePerson?id=<c:out value='${illness.id}' />">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
