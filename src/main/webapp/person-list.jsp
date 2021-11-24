@@ -19,11 +19,11 @@
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a href="<%=request.getContextPath()%>/list"
+            <li><a href="<%=request.getContextPath()%>/listPerson"
                    class="nav-link">Persons</a></li>
             <li><a href="<%=request.getContextPath()%>/listSL"
                    class="nav-link">Sick leaves</a></li>
-            <li><a href="<%=request.getContextPath()%>/listPayments"
+            <li><a href="<%=request.getContextPath()%>/listPayment"
                    class="nav-link">Payments</a></li>
         </ul>
     </nav>

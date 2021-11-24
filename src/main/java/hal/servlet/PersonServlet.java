@@ -57,8 +57,17 @@ public class PersonServlet extends HttpServlet {
                 case "/updatePerson":
                     updatePerson(request, response);
                     break;
-                default:
+                case "/listPerson":
                     listPerson(request, response);
+                    break;
+                case "/listSL":
+                    listSL(request, response);
+                    break;
+                case "/listPayment":
+                    listPayment(request, response);
+                    break;
+                default:
+                    showMain(request, response);
                     break;
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -85,7 +94,7 @@ public class PersonServlet extends HttpServlet {
             throws SQLException, IOException, ClassNotFoundException {
         personDao.create(new Person(request.getParameter("personalCode"), request.getParameter("firstName"), request.getParameter("lastName"),
                 request.getParameter("address"), request.getParameter("email"), request.getParameter("bankAccount"), request.getParameter("insurance")));
-        response.sendRedirect("list");
+        response.sendRedirect("listPerson");
     }
 
     private void updatePerson(HttpServletRequest request, HttpServletResponse response)
@@ -93,14 +102,14 @@ public class PersonServlet extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         personDao.update(new Person(id, request.getParameter("personalCode"), request.getParameter("firstName"), request.getParameter("lastName"),
                 request.getParameter("address"), request.getParameter("email"), request.getParameter("bankAccount"), request.getParameter("insurance")));
-        response.sendRedirect("list");
+        response.sendRedirect("listPerson");
     }
 
     private void deletePerson(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
         Long id = Long.parseLong(request.getParameter("id"));
         personDao.delete(id);
-        response.sendRedirect("list");
+        response.sendRedirect("listPerson");
 
     }
 
@@ -108,6 +117,28 @@ public class PersonServlet extends HttpServlet {
             throws SQLException, IOException, ServletException, ClassNotFoundException {
         List<Person> list = personDao.getAll();
         request.setAttribute("personList", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("person-list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listSL(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
+//        List<Person> list = personDao.getAll();
+//        request.setAttribute("slList", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("illness-list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listPayment(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
+//        List<Person> list = personDao.getAll();
+//        request.setAttribute("paymentList", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("payment-list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showMain(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("person-list.jsp");
         dispatcher.forward(request, response);
     }
