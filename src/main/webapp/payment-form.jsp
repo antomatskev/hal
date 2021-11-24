@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>HAL project</title>
+    <title>HAL project PAYMENT</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
@@ -11,7 +11,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: lightseagreen">
+         style="background-color: gold">
         <div class="navbar-brand">
             <a href="/hal" class="navbar-brand">
                 <img width="20%"
@@ -33,73 +33,53 @@
 <div class="container col-md-5">
     <div class="card">
         <div class="card-body">
-            <c:if test="${person != null}">
-            <form action="updatePerson" method="post">
+            <c:if test="${payment != null}">
+            <form action="updatePayment" method="post">
                 </c:if>
-                <c:if test="${person == null}">
-                <form action="insertPerson" method="post">
+                <c:if test="${payment == null}">
+                <form action="insertPayment" method="post">
                     </c:if>
 
                     <caption>
                         <h2>
-                            <c:if test="${person != null}">
-                                Edit Person
+                            <c:if test="${payment != null}">
+                                Edit Payment
                             </c:if>
-                            <c:if test="${person == null}">
-                                Add New Person
+                            <c:if test="${payment == null}">
+                                Add New Payment
                             </c:if>
                         </h2>
                     </caption>
 
-                    <c:if test="${person != null}">
-                        <input type="hidden" name="id" value="<c:out value='${person.id}' />"/>
+                    <c:if test="${payment != null}">
+                        <input type="hidden" name="id" value="<c:out value='${payment.id}' />"/>
                     </c:if>
 
 
                     <fieldset class="form-group">
-                        <label>Personal code</label> <input type="text"
-                                                            value="<c:out value='${person.personalCode}' />"
+                        <label>Person ID</label> <input type="number" step="0.01"
+                                                            value="<c:out value='${payment.personId}' />"
                                                             class="form-control"
-                                                            name="personalCode" required="required">
+                                                            name="personId" required="required">
                     </fieldset>
                     <fieldset class="form-group">
-                        <label>First Name</label> <input type="text"
-                                                         value="<c:out value='${person.firstName}' />"
+                        <label>Income</label> <input type="number" step="0.01"
+                                                         value="<c:out value='${payment.income}' />"
                                                          class="form-control"
-                                                         name="firstName" required="required">
+                                                         name="income" required="required">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Last Name</label> <input type="text"
-                                                        value="<c:out value='${person.lastName}' />"
+                        <label>Sum</label> <input type="number"
+                                                        value="<c:out value='${payment.sum}' />"
                                                         class="form-control"
-                                                        name="lastName" required="required">
+                                                        name="sum" required="required">
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Address</label> <input type="text"
-                                                      value="<c:out value='${person.address}' />" class="form-control"
-                                                      name="address">
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Email</label> <input type="text"
-                                                    value="<c:out value='${person.email}' />" class="form-control"
-                                                    name="email">
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Bank Account</label> <input type="text"
-                                                           value="<c:out value='${person.bankAccount}' />"
-                                                           class="form-control"
-                                                           name="bankAccount">
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Insurance</label> <input type="text"
-                                                        value="<c:out value='${person.insurance}' />"
-                                                        class="form-control"
-                                                        name="insurance">
+                        <label>Status</label> <input type="text"
+                                                      value="<c:out value='${payment.status}' />" class="form-control"
+                                                      name="status">
                     </fieldset>
 
                     <button type="submit" class="btn btn-success">Save</button>

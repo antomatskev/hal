@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>HAL project</title>
+    <title>HAL project PERSON</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
@@ -56,19 +56,19 @@
             <c:if test="${empty personList}">
                 <tr>Check your Database connection!</tr>
             </c:if>
-            <c:forEach var="illness" items="${personList}">
+            <c:forEach var="payment" items="${personList}">
                 <tr>
-                    <td><c:out value="${illness.id}"/></td>
-                    <td><c:out value="${illness.personalCode}"/></td>
-                    <td><c:out value="${illness.firstName}"/></td>
-                    <td><c:out value="${illness.lastName}"/></td>
-                    <td><c:out value="${illness.address}"/></td>
-                    <td><c:out value="${illness.email}"/></td>
-                    <td><c:out value="${illness.bankAccount}"/></td>
-                    <td><c:out value="${illness.insurance}"/></td>
-                    <td><a href="editPerson?id=<c:out value='${illness.id}' />">Edit</a>
+                    <td><c:out value="${payment.id}"/></td>
+                    <td><c:out value="${payment.personalCode}"/></td>
+                    <td><c:out value="${payment.firstName}"/></td>
+                    <td><c:out value="${payment.lastName}"/></td>
+                    <td><c:out value="${payment.address}"/></td>
+                    <td><c:out value="${payment.email}"/></td>
+                    <td><c:out value="${payment.bankAccount}"/></td>
+                    <td><c:out value="${payment.insurance}"/></td>
+                    <td><a href="editPerson?id=<c:out value='${payment.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deletePerson?id=<c:out value='${illness.id}' />">Delete</a></td>
+                                href="deletePerson?id=<c:out value='${payment.id}' />">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>

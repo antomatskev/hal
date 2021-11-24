@@ -88,12 +88,12 @@ public class IllnessDao {
             while (rs.next()) {
                 Illness illness = new Illness();
                 illness.setId(rs.getLong("id"));
-                preparedStatement.setLong(1, illness.getPersonId());
-                preparedStatement.setString(2, illness.getStartDate());
-                preparedStatement.setString(3, illness.getEndDate());
-                preparedStatement.setString(4, illness.getDiagnosis());
-                preparedStatement.setString(5, illness.getMedicalDoctor());
-                preparedStatement.setString(6, illness.getNotes());
+                illness.setPersonId(rs.getLong("personId"));
+                illness.setStartDate(rs.getString("startDate"));
+                illness.setEndDate(rs.getString("endDate"));
+                illness.setDiagnosis(rs.getString("diagnosis"));
+                illness.setMedicalDoctor(rs.getString("medicalDoctor"));
+                illness.setNotes(rs.getString("notes"));
                 list.add(illness);
             }
         } catch (SQLException e) {
@@ -112,12 +112,12 @@ public class IllnessDao {
             while (rs.next()) {
                 illness = new Illness();
                 illness.setId(rs.getLong("id"));
-                preparedStatement.setLong(1, illness.getPersonId());
-                preparedStatement.setString(2, illness.getStartDate());
-                preparedStatement.setString(3, illness.getEndDate());
-                preparedStatement.setString(4, illness.getDiagnosis());
-                preparedStatement.setString(5, illness.getMedicalDoctor());
-                preparedStatement.setString(6, illness.getNotes());
+                illness.setPersonId(rs.getLong("personId"));
+                illness.setStartDate(rs.getString("startDate"));
+                illness.setEndDate(rs.getString("endDate"));
+                illness.setDiagnosis(rs.getString("diagnosis"));
+                illness.setMedicalDoctor(rs.getString("medicalDoctor"));
+                illness.setNotes(rs.getString("notes"));
             }
         } catch (SQLException e) {
             printSQLException(e);

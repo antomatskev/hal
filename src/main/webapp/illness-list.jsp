@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>HAL project</title>
+    <title>HAL project SICK LEAVE</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
@@ -55,18 +55,18 @@
             <c:if test="${empty slList}">
                 <tr>Check your Database connection!</tr>
             </c:if>
-            <c:forEach var="illness" items="${slList}">
+            <c:forEach var="payment" items="${slList}">
                 <tr>
-                    <td><c:out value="${illness.id}"/></td>
-                    <td><c:out value="${illness.personId}"/></td>
-                    <td><c:out value="${illness.startDate}"/></td>
-                    <td><c:out value="${illness.endDate}"/></td>
-                    <td><c:out value="${illness.diagnosis}"/></td>
-                    <td><c:out value="${illness.medicalDoctor}"/></td>
-                    <td><c:out value="${illness.notes}"/></td>
-                    <td><a href="editSL?id=<c:out value='${illness.id}' />">Edit</a>
+                    <td><c:out value="${payment.id}"/></td>
+                    <td><c:out value="${payment.personId}"/></td>
+                    <td><c:out value="${payment.startDate}"/></td>
+                    <td><c:out value="${payment.endDate}"/></td>
+                    <td><c:out value="${payment.diagnosis}"/></td>
+                    <td><c:out value="${payment.medicalDoctor}"/></td>
+                    <td><c:out value="${payment.notes}"/></td>
+                    <td><a href="editSL?id=<c:out value='${payment.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteSL?id=<c:out value='${illness.id}' />">Delete</a></td>
+                                href="deleteSL?id=<c:out value='${payment.id}' />">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>

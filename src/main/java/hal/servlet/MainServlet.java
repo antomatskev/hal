@@ -8,6 +8,7 @@ import hal.dao.IllnessDao;
 import hal.dao.PaymentDao;
 import hal.dao.PersonDao;
 import hal.model.Illness;
+import hal.model.Payment;
 import hal.model.Person;
 
 import javax.servlet.RequestDispatcher;
@@ -85,6 +86,21 @@ public class MainServlet extends HttpServlet {
                 case "/listSL":
                     listSL(request, response);
                     break;
+                case "/newPayment":
+                    newPayment(request, response);
+                    break;
+                case "/insertPayment":
+                    insertPayment(request, response);
+                    break;
+                case "/deletePayment":
+                    deletePayment(request, response);
+                    break;
+                case "/editPayment":
+                    editPayment(request, response);
+                    break;
+                case "/updatePayment":
+                    updatePayment(request, response);
+                    break;
                 case "/listPayment":
                     listPayment(request, response);
                     break;
@@ -153,7 +169,7 @@ public class MainServlet extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         Illness foundIllness = illnessDao.getById(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("illness-form.jsp");
-        request.setAttribute("person", foundIllness);
+        request.setAttribute("illness", foundIllness);
         dispatcher.forward(request, response);
 
     }
@@ -191,10 +207,50 @@ public class MainServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void newPayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("payment-form.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void editPayment(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException, ClassNotFoundException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Payment foundPayment = paymentDao.getById(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("payment-form.jsp");
+        request.setAttribute("payment", foundPayment);
+        dispatcher.forward(request, response);
+
+    }
+
+    private void insertPayment(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        paymentDao.create(new Payment(Long.parseLong(request.getParameter("personId")),
+                Double.parseDouble(request.getParameter("income")),
+                Double.parseDouble(request.getParameter("sum")), request.getParameter("status")));
+        response.sendRedirect("listPayment");
+    }
+
+    private void updatePayment(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        paymentDao.update(new Payment(id, Long.parseLong(request.getParameter("personId")),
+                Double.parseDouble(request.getParameter("income")),
+                Double.parseDouble(request.getParameter("sum")), request.getParameter("status")));
+        response.sendRedirect("listPayment");
+    }
+
+    private void deletePayment(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        paymentDao.delete(id);
+        response.sendRedirect("listPayment");
+
+    }
+
     private void listPayment(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException, ClassNotFoundException {
-//        List<Person> list = personDao.getAll();
-//        request.setAttribute("paymentList", list);
+        List<Payment> list = paymentDao.getAll();
+        request.setAttribute("paymentList", list);
         RequestDispatcher dispatcher = request.getRequestDispatcher("payment-list.jsp");
         dispatcher.forward(request, response);
     }
