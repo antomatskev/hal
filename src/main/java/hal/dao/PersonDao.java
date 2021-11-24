@@ -10,9 +10,9 @@ public class PersonDao {
 
     private static final String INSERT_PERSON_SQL = "INSERT INTO person" +
             " (personalCode, firstName, lastName, address, email, bankAccount, insurance) VALUES " +
-            " (?, ?, ?, ?, ?,?,?);";
+            " (?,?,?,?,?,?,?);";
     private static final String UPDATE_PERSON_SQL = "update person set personalCode=?,firstName=?," +
-            "firstName=?,lastName=?,address=?,email=?,bankAccount=?,insurance=? where id=?";
+            "lastName=?,address=?,email=?,bankAccount=?,insurance=? where id=?";
     private static final String DELETE_PERSON_SQL = "delete from person where id=?";
     private static final String ALL_PERSONS_SQL = "select * from person";
     private static final String RECORD_BY_PERSON_ID_SQL = "select * from person where id=?";
@@ -56,6 +56,7 @@ public class PersonDao {
             preparedStatement.setString(5, person.getEmail());
             preparedStatement.setString(6, person.getBankAccount());
             preparedStatement.setString(7, person.getInsurance());
+            preparedStatement.setLong(8, person.getId());
 
             System.out.println(preparedStatement);
             result = preparedStatement.executeUpdate();
@@ -66,7 +67,6 @@ public class PersonDao {
         return result;
     }
 
-    //    public int delete(Person person) {
     public int delete(Long id) throws ClassNotFoundException {
         int status = 0;
         Class.forName(CLASS_NAME);

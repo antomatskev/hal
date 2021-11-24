@@ -30,6 +30,11 @@ public class PersonServlet extends HttpServlet {
         personDao = new PersonDao();
     }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -37,19 +42,19 @@ public class PersonServlet extends HttpServlet {
         final String action = request.getServletPath();
         try {
             switch (action) {
-                case "/new":
-                    showNewForm(request, response);
+                case "/newPerson":
+                    showNewPersonForm(request, response);
                     break;
-                case "/insert":
+                case "/insertPerson":
                     insertPerson(request, response);
                     break;
-                case "/delete":
+                case "/deletePerson":
                     deletePerson(request, response);
                     break;
-                case "/edit":
-                    showEditForm(request, response);
+                case "/editPerson":
+                    showEditPersonForm(request, response);
                     break;
-                case "/update":
+                case "/updatePerson":
                     updatePerson(request, response);
                     break;
                 default:
@@ -61,14 +66,14 @@ public class PersonServlet extends HttpServlet {
         }
     }
 
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showNewPersonForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("person-form.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+    private void showEditPersonForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException, ClassNotFoundException {
-        long id = Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
         Person foundPerson = personDao.getById(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("person-form.jsp");
         request.setAttribute("person", foundPerson);
@@ -85,7 +90,7 @@ public class PersonServlet extends HttpServlet {
 
     private void updatePerson(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
-        long id = Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
         personDao.update(new Person(id, request.getParameter("personalCode"), request.getParameter("firstName"), request.getParameter("lastName"),
                 request.getParameter("address"), request.getParameter("email"), request.getParameter("bankAccount"), request.getParameter("insurance")));
         response.sendRedirect("list");
@@ -93,7 +98,7 @@ public class PersonServlet extends HttpServlet {
 
     private void deletePerson(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
-        long id = Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id"));
         personDao.delete(id);
         response.sendRedirect("list");
 

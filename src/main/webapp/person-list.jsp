@@ -35,8 +35,7 @@
         <h3 class="text-center">List of Persons</h3>
         <hr>
         <div class="container text-left">
-
-            <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add New Person</a>
+            <a href="<%=request.getContextPath()%>/newPerson" class="btn btn-success">Add New Person</a>
         </div>
         <br>
         <table class="table table-bordered">
@@ -54,6 +53,9 @@
             </tr>
             </thead>
             <tbody>
+            <c:if test="${empty personList}">
+                <tr>Check your Database connection!</tr>
+            </c:if>
             <c:forEach var="person" items="${personList}">
                 <tr>
                     <td><c:out value="${person.id}"/></td>
@@ -64,9 +66,9 @@
                     <td><c:out value="${person.email}"/></td>
                     <td><c:out value="${person.bankAccount}"/></td>
                     <td><c:out value="${person.insurance}"/></td>
-                    <td><a href="edit?id=<c:out value='${person.id}' />">Edit</a>
+                    <td><a href="editPerson?id=<c:out value='${person.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="delete?id=<c:out value='${person.id}' />">Delete</a></td>
+                                href="deletePerson?id=<c:out value='${person.id}' />">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
