@@ -53,7 +53,7 @@
             </thead>
             <tbody>
             <c:if test="${empty slList}">
-                <tr>Check your Database connection!</tr>
+                <tr>No records in Sick Leaves table.</tr>
             </c:if>
             <c:forEach var="payment" items="${slList}">
                 <tr>

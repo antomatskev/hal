@@ -51,7 +51,7 @@
             </thead>
             <tbody>
             <c:if test="${empty paymentList}">
-                <tr>Check your Database connection!</tr>
+                <tr>No records in Payment table.</tr>
             </c:if>
             <c:forEach var="payment" items="${paymentList}">
                 <tr>
