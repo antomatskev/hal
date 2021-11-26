@@ -4,6 +4,7 @@ public class Payment {
 
     private Long id;
     private Long personId;
+    private String personalCode;
     private Double income;
     private Double sum;
     private String status;
@@ -11,7 +12,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Long id, Long personId, Double income, Double sum, String status) {
+    public Payment(Long id, Long personId, String personalCode, Double income, Double sum, String status) {
         this.id = id;
         this.personId = personId;
         this.income = income;
@@ -19,7 +20,7 @@ public class Payment {
         this.status = status;
     }
 
-    public Payment(Long personId, Double income, Double sum, String status) {
+    public Payment(Long personId, String personalCode, Double income, Double sum, String status) {
         this.personId = personId;
         this.income = income;
         this.sum = sum;
@@ -40,6 +41,14 @@ public class Payment {
 
     public void setPersonId(Long personId) {
         this.personId = personId;
+    }
+
+    public String getPersonalCode() {
+        return personalCode;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
     }
 
     public Double getIncome() {

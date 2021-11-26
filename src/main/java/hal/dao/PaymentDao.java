@@ -8,14 +8,16 @@ import hal.model.Payment;
 
 public class PaymentDao {
 
-    private static final String INSERT_PERSON_SQL = "INSERT INTO payment" +
+    private static final String INSERT_PAYMENT_SQL = "INSERT INTO payment" +
             " (personId, income, sum, status) VALUES " +
             " (?,?,?,?);";
-    private static final String UPDATE_PERSON_SQL = "update payment set personId=?,income=?," +
+    private static final String UPDATE_PAYMENT_SQL = "update payment set personId=?,income=?," +
             "sum=?,status=? where id=?";
-    private static final String DELETE_PERSON_SQL = "delete from payment where id=?";
-    private static final String ALL_PERSONS_SQL = "select * from payment";
-    private static final String RECORD_BY_PERSON_ID_SQL = "select * from payment where id=?";
+    private static final String DELETE_PAYMENT_SQL = "delete from payment where id=?";
+    private static final String ALL_PAYMENTS_SQL = "select * from payment";
+    private static final String ALL_PAYMENTS_SQL_JOIN = "select payment.id, personId, " +
+            "personalCode, income, sum, status from payment cross join person where person.id=payment.personId";
+    private static final String RECORD_BY_PAYMENT_ID_SQL = "select * from payment where id=?";
     private final String DB_URL = "jdbc:postgresql://hattie.db.elephantsql.com/xxpiazwq";
     private final String DB_USER = "xxpiazwq";
     private final String DB_PASS = "lYYEfiXK1z2GPt9DiCi_dH_X1MSprLiX";
@@ -25,7 +27,7 @@ public class PaymentDao {
         int result = 0;
         Class.forName(CLASS_NAME);
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PERSON_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PAYMENT_SQL)) {
             preparedStatement.setLong(1, payment.getPersonId());
             preparedStatement.setDouble(2, payment.getIncome());
             preparedStatement.setDouble(3, payment.getSum());
@@ -43,7 +45,7 @@ public class PaymentDao {
         int result = 0;
         Class.forName(CLASS_NAME);
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PERSON_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PAYMENT_SQL)) {
             preparedStatement.setLong(1, payment.getPersonId());
             preparedStatement.setDouble(2, payment.getIncome());
             preparedStatement.setDouble(3, payment.getSum());
@@ -63,7 +65,7 @@ public class PaymentDao {
         int status = 0;
         Class.forName(CLASS_NAME);
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PERSON_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PAYMENT_SQL)) {
             preparedStatement.setLong(1, id);
             status = preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -77,12 +79,13 @@ public class PaymentDao {
         Class.forName(CLASS_NAME);
         List<Payment> list = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(ALL_PERSONS_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ALL_PAYMENTS_SQL_JOIN)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Payment payment = new Payment();
                 payment.setId(rs.getLong("id"));
                 payment.setPersonId(rs.getLong("personId"));
+                payment.setPersonalCode(rs.getString("personalCode"));
                 payment.setIncome(rs.getDouble("income"));
                 payment.setSum(rs.getDouble("sum"));
                 payment.setStatus(rs.getString("status"));
@@ -99,13 +102,14 @@ public class PaymentDao {
         Payment payment = null;
         try (Connection connection = DriverManager
                 .getConnection(DB_URL, DB_USER, DB_PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(RECORD_BY_PERSON_ID_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(RECORD_BY_PAYMENT_ID_SQL)) {
             preparedStatement.setLong(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 payment = new Payment();
                 payment.setId(rs.getLong("id"));
                 payment.setPersonId(rs.getLong("personId"));
+                payment.setPersonalCode(rs.getString("personalCode"));
                 payment.setIncome(rs.getDouble("income"));
                 payment.setSum(rs.getDouble("sum"));
                 payment.setStatus(rs.getString("status"));

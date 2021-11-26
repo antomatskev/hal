@@ -8,14 +8,12 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
          style="background-color: lightskyblue">
         <div class="navbar-brand">
             <a href="/hal" class="navbar-brand">
-                <img width="20%"
-                     src="https://www.haigekassa.ee/sites/default/files/symboolika/hk_eng_cmyk.jpg">
+                HAL
             </a>
         </div>
 
@@ -101,5 +99,19 @@
         </div>
     </div>
 </div>
+<footer style="position: relative;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: lightskyblue;
+        text-align: center;">
+    <div class="navbar-header">
+        <a href="/hal" class="navbar-brand">
+            <img width="20%"
+                 src="https://www.haigekassa.ee/sites/default/files/symboolika/hk_eng_cmyk.jpg">
+        </a>
+    </div>
+</footer>
 </body>
 </html>

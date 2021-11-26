@@ -176,7 +176,7 @@ public class MainServlet extends HttpServlet {
 
     private void insertSL(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
-        illnessDao.create(new Illness(Long.parseLong(request.getParameter("personId")), request.getParameter("startDate"),
+        illnessDao.create(new Illness(Long.parseLong(request.getParameter("personId")), request.getParameter("personalCode"), request.getParameter("startDate"),
                 request.getParameter("endDate"), request.getParameter("diagnosis"), request.getParameter("medicalDoctor"),
                 request.getParameter("notes")));
         response.sendRedirect("listSL");
@@ -185,7 +185,7 @@ public class MainServlet extends HttpServlet {
     private void updateSL(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
         Long id = Long.parseLong(request.getParameter("id"));
-        illnessDao.update(new Illness(id, Long.parseLong(request.getParameter("personId")), request.getParameter("startDate"),
+        illnessDao.update(new Illness(id, Long.parseLong(request.getParameter("personId")), request.getParameter("personalCode"), request.getParameter("startDate"),
                 request.getParameter("endDate"), request.getParameter("diagnosis"), request.getParameter("medicalDoctor"),
                 request.getParameter("notes")));
         response.sendRedirect("listSL");
@@ -225,6 +225,7 @@ public class MainServlet extends HttpServlet {
     private void insertPayment(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
         paymentDao.create(new Payment(Long.parseLong(request.getParameter("personId")),
+                request.getParameter("personalCode"),
                 Double.parseDouble(request.getParameter("income")),
                 Double.parseDouble(request.getParameter("sum")), request.getParameter("status")));
         response.sendRedirect("listPayment");
@@ -234,6 +235,7 @@ public class MainServlet extends HttpServlet {
             throws SQLException, IOException, ClassNotFoundException {
         Long id = Long.parseLong(request.getParameter("id"));
         paymentDao.update(new Payment(id, Long.parseLong(request.getParameter("personId")),
+                request.getParameter("personalCode"),
                 Double.parseDouble(request.getParameter("income")),
                 Double.parseDouble(request.getParameter("sum")), request.getParameter("status")));
         response.sendRedirect("listPayment");

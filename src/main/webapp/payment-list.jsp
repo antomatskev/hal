@@ -14,8 +14,8 @@
          style="background-color: gold">
         <div class="navbar-header">
             <a href="/hal" class="navbar-brand">
-                <img width="20%"
-                     src="https://www.haigekassa.ee/sites/default/files/symboolika/hk_eng_cmyk.jpg"></a>
+                HAL
+            </a>
         </div>
 
         <ul class="nav navbar-nav">
@@ -43,6 +43,7 @@
             <tr>
                 <th>ID</th>
                 <th>Person ID</th>
+                <th>Personal code</th>
                 <th>Income</th>
                 <th>Sum</th>
                 <th>Status</th>
@@ -57,6 +58,7 @@
                 <tr>
                     <td><c:out value="${payment.id}"/></td>
                     <td><c:out value="${payment.personId}"/></td>
+                    <td><c:out value="${payment.personalCode}"/></td>
                     <td><c:out value="${payment.income}"/></td>
                     <td><c:out value="${payment.sum}"/></td>
                     <td><c:out value="${payment.status}"/></td>
@@ -70,5 +72,19 @@
         </table>
     </div>
 </div>
+<footer style="position: relative;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: gold;
+        text-align: center;">
+    <div class="navbar-header">
+        <a href="/hal" class="navbar-brand">
+            <img width="20%"
+                 src="https://www.haigekassa.ee/sites/default/files/symboolika/hk_eng_cmyk.jpg">
+        </a>
+    </div>
+</footer>
 </body>
 </html>

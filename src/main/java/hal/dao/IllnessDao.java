@@ -16,6 +16,8 @@ public class IllnessDao {
             "endDate=?,diagnosis=?,medicalDoctor=?,notes=? where id=?";
     private static final String DELETE_ILLNESS_SQL = "delete from illness where id=?";
     private static final String ALL_ILLNESSES_SQL = "select * from illness";
+    private static final String ALL_ILLNESSES_SQL_JOIN = "select illness.id, personId, " +
+    "personalCode, startDate, endDate, diagnosis, medicalDoctor, notes from illness cross join person where person.id=illness.personId";
     private static final String RECORD_BY_ILLNESS_ID_SQL = "select * from illness where id=?";
     private final String DB_URL = "jdbc:postgresql://hattie.db.elephantsql.com/xxpiazwq";
     private final String DB_USER = "xxpiazwq";
@@ -53,7 +55,7 @@ public class IllnessDao {
             preparedStatement.setString(4, illness.getDiagnosis());
             preparedStatement.setString(5, illness.getMedicalDoctor());
             preparedStatement.setString(6, illness.getNotes());
-            preparedStatement.setLong(8, illness.getId());
+            preparedStatement.setLong(7, illness.getId());
 
             System.out.println(preparedStatement);
             result = preparedStatement.executeUpdate();
@@ -83,12 +85,13 @@ public class IllnessDao {
         List<Illness> list = new ArrayList<>();
         try (Connection connection = DriverManager
                 .getConnection(DB_URL, DB_USER, DB_PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(ALL_ILLNESSES_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ALL_ILLNESSES_SQL_JOIN)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Illness illness = new Illness();
                 illness.setId(rs.getLong("id"));
                 illness.setPersonId(rs.getLong("personId"));
+                illness.setPersonalCode(rs.getString("personalCode"));
                 illness.setStartDate(rs.getString("startDate"));
                 illness.setEndDate(rs.getString("endDate"));
                 illness.setDiagnosis(rs.getString("diagnosis"));
@@ -113,6 +116,7 @@ public class IllnessDao {
                 illness = new Illness();
                 illness.setId(rs.getLong("id"));
                 illness.setPersonId(rs.getLong("personId"));
+                illness.setPersonalCode(rs.getString("personalCode"));
                 illness.setStartDate(rs.getString("startDate"));
                 illness.setEndDate(rs.getString("endDate"));
                 illness.setDiagnosis(rs.getString("diagnosis"));

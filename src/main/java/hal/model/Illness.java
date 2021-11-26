@@ -4,6 +4,7 @@ public class Illness {
 
     private Long id;
     private Long personId;
+    private String personalCode;
     private String startDate;
     private String endDate;
     private String diagnosis;
@@ -13,7 +14,7 @@ public class Illness {
     public Illness() {
     }
 
-    public Illness(Long id, Long personId, String startDate, String endDate, String diagnosis, String medicalDoctor, String notes) {
+    public Illness(Long id, Long personId, String personalCode, String startDate, String endDate, String diagnosis, String medicalDoctor, String notes) {
         this.id = id;
         this.personId = personId;
         this.startDate = startDate;
@@ -23,7 +24,7 @@ public class Illness {
         this.notes = notes;
     }
 
-    public Illness(Long personId, String startDate, String endDate, String diagnosis, String medicalDoctor, String notes) {
+    public Illness(Long personId, String personalCode, String startDate, String endDate, String diagnosis, String medicalDoctor, String notes) {
         this.personId = personId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -46,6 +47,14 @@ public class Illness {
 
     public void setPersonId(Long personId) {
         this.personId = personId;
+    }
+
+    public String getPersonalCode() {
+        return personalCode;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
     }
 
     public String getStartDate() {
