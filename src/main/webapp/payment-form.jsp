@@ -69,7 +69,7 @@
                     </fieldset>
 
                     <fieldset class="form-group">
-                        <label>Sum</label> <input type="number"
+                        <label>Sum</label> <input type="text"
                                                         value="<c:out value='${payment.sum}' />"
                                                         class="form-control"
                                                         name="sum" required="required">
