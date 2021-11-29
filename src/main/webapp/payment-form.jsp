@@ -56,13 +56,13 @@
 
 
                     <fieldset class="form-group">
-                        <label>Person ID</label> <input type="number" step="0.01"
+                        <label>Person ID</label> <input type="text"
                                                             value="<c:out value='${payment.personId}' />"
                                                             class="form-control"
                                                             name="personId" required="required">
                     </fieldset>
                     <fieldset class="form-group">
-                        <label>Income</label> <input type="number" step="0.01"
+                        <label>Income</label> <input type="text"
                                                          value="<c:out value='${payment.income}' />"
                                                          class="form-control"
                                                          name="income" required="required">
