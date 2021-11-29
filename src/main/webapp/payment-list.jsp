@@ -11,7 +11,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: gold">
+         style="background-color: red">
         <div class="navbar-header">
             <a href="/hal" class="navbar-brand">
                 HAL
@@ -77,7 +77,7 @@
         bottom: 0;
         left: 0;
         padding: 1rem;
-        background-color: gold;
+        background-color: red;
         text-align: center;">
     <div class="navbar-header">
         <a href="/hal" class="navbar-brand">
