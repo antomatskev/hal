@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hal.model.Illness;
-import hal.model.Person;
 
 public class IllnessDao {
 
@@ -15,7 +14,6 @@ public class IllnessDao {
     private static final String UPDATE_ILLNESS_SQL = "update illness set personId=?,startDate=?," +
             "endDate=?,diagnosis=?,medicalDoctor=?,notes=? where id=?";
     private static final String DELETE_ILLNESS_SQL = "delete from illness where id=?";
-    private static final String ALL_ILLNESSES_SQL = "select * from illness";
     private static final String ALL_ILLNESSES_SQL_JOIN = "select illness.id, personId, " +
     "personalCode, startDate, endDate, diagnosis, medicalDoctor, notes from illness cross join person where person.id=illness.personId";
     private static final String RECORD_BY_ILLNESS_ID_SQL = "select * from illness where id=?";

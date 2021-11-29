@@ -14,7 +14,6 @@ public class PaymentDao {
     private static final String UPDATE_PAYMENT_SQL = "update payment set personId=?,income=?," +
             "sum=?,status=? where id=?";
     private static final String DELETE_PAYMENT_SQL = "delete from payment where id=?";
-    private static final String ALL_PAYMENTS_SQL = "select * from payment";
     private static final String ALL_PAYMENTS_SQL_JOIN = "select payment.id, personId, " +
             "personalCode, income, sum, status from payment cross join person where person.id=payment.personId";
     private static final String RECORD_BY_PAYMENT_ID_SQL = "select * from payment where id=?";
@@ -29,8 +28,8 @@ public class PaymentDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PAYMENT_SQL)) {
             preparedStatement.setLong(1, payment.getPersonId());
-            preparedStatement.setDouble(2, payment.getIncome());
-            preparedStatement.setDouble(3, payment.getSum());
+            preparedStatement.setString(2, payment.getIncome());
+            preparedStatement.setString(3, payment.getSum());
             preparedStatement.setString(4, payment.getStatus());
             System.out.println(preparedStatement);
             result = preparedStatement.executeUpdate();
@@ -47,8 +46,8 @@ public class PaymentDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PAYMENT_SQL)) {
             preparedStatement.setLong(1, payment.getPersonId());
-            preparedStatement.setDouble(2, payment.getIncome());
-            preparedStatement.setDouble(3, payment.getSum());
+            preparedStatement.setString(2, payment.getIncome());
+            preparedStatement.setString(3, payment.getSum());
             preparedStatement.setString(4, payment.getStatus());
             preparedStatement.setLong(5, payment.getId());
 
@@ -86,8 +85,8 @@ public class PaymentDao {
                 payment.setId(rs.getLong("id"));
                 payment.setPersonId(rs.getLong("personId"));
                 payment.setPersonalCode(rs.getString("personalCode"));
-                payment.setIncome(rs.getDouble("income"));
-                payment.setSum(rs.getDouble("sum"));
+                payment.setIncome(rs.getString("income"));
+                payment.setSum(rs.getString("sum"));
                 payment.setStatus(rs.getString("status"));
                 list.add(payment);
             }
@@ -110,8 +109,8 @@ public class PaymentDao {
                 payment.setId(rs.getLong("id"));
                 payment.setPersonId(rs.getLong("personId"));
                 payment.setPersonalCode(rs.getString("personalCode"));
-                payment.setIncome(rs.getDouble("income"));
-                payment.setSum(rs.getDouble("sum"));
+                payment.setIncome(rs.getString("income"));
+                payment.setSum(rs.getString("sum"));
                 payment.setStatus(rs.getString("status"));
             }
         } catch (SQLException e) {
