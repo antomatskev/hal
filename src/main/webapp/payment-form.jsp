@@ -91,7 +91,7 @@
         bottom: 0;
         left: 0;
         padding: 1rem;
-        background-color: red;
+        background-color: green;
         text-align: center;">
     <div class="navbar-header">
         <a href="/hal" class="navbar-brand">
